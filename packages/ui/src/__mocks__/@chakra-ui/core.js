@@ -8,4 +8,8 @@ export const Input = function Input({ children }) {
   return <>{children}</>;
 };
 
+export const Button = function Button({ children }) {
+  return <>{children}</>;
+};
+
 export const theme = { colors: {} };

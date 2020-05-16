@@ -25,10 +25,10 @@ describe("server test", () => {
   });
 
   describe("routes", () => {
-    it("should registered [GET] /processed", () => {
+    it("should register [GET] /processed", () => {
       expect(getProcessedList).toHaveBeenCalled();
     });
-    it("should registered [POST] /processed", () => {
+    it("should register [POST] /processed", () => {
       expect(addToProcessedList).toHaveBeenCalled();
     });
   });

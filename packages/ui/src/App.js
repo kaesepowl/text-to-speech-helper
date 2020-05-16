@@ -1,36 +1,41 @@
 import React from "react";
-import { ThemeProvider, theme, Input } from "@chakra-ui/core";
+import { ThemeProvider, theme } from "@chakra-ui/core";
+import { Switch, Route, useHistory } from "react-router-dom";
 
 import "./App.css";
-const customTheme = {
-  ...theme,
-  colors: {
-    ...theme.colors,
-    brand: {
-      900: "#1a365d",
-      800: "#153e75",
-      700: "#2a69ac",
-    },
-  },
+import Login from "./components/pages/Login";
+
+const getCredentials = () => {
+  const credentials = {
+    accessKeyId: localStorage.getItem("access-key-id"),
+    secretAccessKey: localStorage.getItem("secret-access-key"),
+  };
+  if (!credentials.accessKeyId || !credentials.secretAccessKey) {
+    return null;
+  }
+  return credentials;
 };
 
 function App() {
-  const [apiKey, setApiKey] = React.useState(localStorage.getItem("api-key"));
-  const [apiKeyInput, setApiKeyInput] = React.useState(apiKey);
+  const history = useHistory();
+
+  React.useEffect(() => {
+    const credentials = getCredentials();
+
+    if (credentials === null) {
+      history.push("/login");
+    }
+  }, [history]);
+
   return (
-    <ThemeProvider theme={customTheme}>
+    <ThemeProvider theme={theme}>
       <div className="App">
-        {apiKey === null && (
-          <Input
-            value={apiKeyInput || ""}
-            onChange={(e) => setApiKeyInput(e.target.value)}
-            data-test-id="api-key-input"
-            onBlur={(e) => {
-              setApiKey(apiKeyInput);
-              localStorage.setItem("api-key", apiKeyInput);
-            }}
-          />
-        )}
+        <Switch>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/">Home</Route>
+        </Switch>
       </div>
     </ThemeProvider>
   );
