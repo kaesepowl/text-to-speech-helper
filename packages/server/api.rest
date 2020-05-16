@@ -1,0 +1,17 @@
+@accessKeyId = {{$processEnv POLLY_ACCESS_KEY_ID}}
+@secretAccessKey = {{$processEnv POLLY_SECRET_ACCESS_KEY}}
+
+###
+
+GET http://localhost:8080/processed
+
+###
+
+POST http://localhost:8080/processed
+content-type: application/json
+
+{
+  "text": "Hallo Paul",
+  "accessKeyId": "{{accessKeyId}}",
+  "secretAccessKey": "{{secretAccessKey}}"
+}
