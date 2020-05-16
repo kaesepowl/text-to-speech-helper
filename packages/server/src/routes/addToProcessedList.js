@@ -22,7 +22,8 @@ module.exports = async (fastify) => {
         Text: `<speak>${text}</speak>`,
         TextType: "ssml",
         OutputFormat: "mp3",
-        VoiceId: "Amy",
+        VoiceId: "Hans",
+        LanguageCode: "de-DE",
       }).promise();
 
       const newId = md5(text);

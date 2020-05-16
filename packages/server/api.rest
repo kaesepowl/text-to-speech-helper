@@ -15,7 +15,7 @@ POST http://localhost:8080/processed
 content-type: application/json
 
 {
-  "text": "Hallo Paul",
+  "text": "Mit Soforthilfen hatten Bund und Länder Soloselbstständige und Kleinunternehmer vor der Pleite bewahren wollen. Doch viele der damit verknüpften Hoffnungen zerschellen an der Wirklichkeit.",
   "accessKeyId": "{{accessKeyId}}",
   "secretAccessKey": "{{secretAccessKey}}"
 }
