@@ -7,6 +7,10 @@ GET http://localhost:8080/processed
 
 ###
 
+GET http://localhost:8080/processed/1234/audio
+
+###
+
 POST http://localhost:8080/processed
 content-type: application/json
 

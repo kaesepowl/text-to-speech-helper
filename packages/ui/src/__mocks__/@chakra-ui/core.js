@@ -12,4 +12,8 @@ export const Button = function Button({ children }) {
   return <>{children}</>;
 };
 
+export const Link = function Link({ children }) {
+  return <>{children}</>;
+};
+
 export const theme = { colors: {} };

@@ -1,9 +1,11 @@
 const { server } = require("./server");
 
 const getProcessedList = require("./routes/getProcessedList");
+const getProcessedAudio = require("./routes/getProcessedAudio");
 const addToProcessedList = require("./routes/addToProcessedList");
 
 jest.mock("./routes/getProcessedList", () => jest.fn(async () => {}));
+jest.mock("./routes/getProcessedAudio", () => jest.fn(async () => {}));
 jest.mock("./routes/addToProcessedList", () => jest.fn(async () => {}));
 
 describe("server test", () => {
@@ -27,6 +29,9 @@ describe("server test", () => {
   describe("routes", () => {
     it("should register [GET] /processed", () => {
       expect(getProcessedList).toHaveBeenCalled();
+    });
+    it("should register [GET] /processed/:id/audio", () => {
+      expect(getProcessedAudio).toHaveBeenCalled();
     });
     it("should register [POST] /processed", () => {
       expect(addToProcessedList).toHaveBeenCalled();

@@ -3,7 +3,7 @@ describe("list of already processed texts", () => {
     cy.server();
     cy.route({
       method: "GET",
-      url: "/processed",
+      url: "**/processed",
       status: 200,
       response: [
         {
@@ -19,5 +19,10 @@ describe("list of already processed texts", () => {
 
   it("should find processed text", () => {
     cy.contains("Hallo Paul");
+  });
+  it("should find audio element", () => {
+    cy.get(
+      `[src="http://localhost:8080/processed/${"abcd1234".repeat(4)}/audio"]`
+    );
   });
 });

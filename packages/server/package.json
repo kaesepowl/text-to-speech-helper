@@ -11,6 +11,8 @@
   "dependencies": {
     "aws-sdk": "^2.678.0",
     "fastify": "^2.14.1",
+    "fastify-cors": "^3.0.3",
+    "fastify-static": "^2.7.0",
     "md5": "^2.2.1"
   },
   "devDependencies": {
