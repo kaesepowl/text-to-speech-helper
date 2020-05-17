@@ -10,10 +10,10 @@ const pWriteFile = promisify(writeFile);
 module.exports = async (fastify) => {
   fastify.post("/processed", async (request, reply) => {
     try {
-      const { text, accessKeyId, secretAccessKey } = request.body;
+      const { text } = request.body;
       const Polly = new AWS.Polly({
-        accessKeyId,
-        secretAccessKey,
+        accessKeyId: process.env.POLLY_ACCESS_KEY_ID,
+        secretAccessKey: process.env.POLLY_SECRET_ACCESS_KEY,
         signatureVersion: "v4",
         region: "eu-central-1",
       });

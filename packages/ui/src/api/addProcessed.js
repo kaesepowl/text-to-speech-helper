@@ -6,8 +6,6 @@ const addProcessed = (text) =>
     },
     body: JSON.stringify({
       text,
-      accessKeyId: localStorage.getItem("access-key-id"),
-      secretAccessKey: localStorage.getItem("secret-access-key"),
     }),
   }).then((res) => res.json());
 

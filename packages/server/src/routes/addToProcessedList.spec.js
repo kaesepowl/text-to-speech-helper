@@ -31,13 +31,17 @@ describe("add new text to speech", () => {
 
     writeFile.mockImplementation((path, stream, cb) => cb(null));
 
+    process.env = {
+      ...process.env,
+      POLLY_ACCESS_KEY_ID: "ACCESS_KEY_ID",
+      POLLY_SECRET_ACCESS_KEY: "SECRET_ACCESS_KEY",
+    };
+
     res = await fastify.inject({
       method: "POST",
       path: "/processed",
       payload: {
         text: "THE_NEW_TEXT",
-        accessKeyId: "THE_ACCESS_ID",
-        secretAccessKey: "THE_SECRET_KEY",
       },
     });
   });
@@ -45,8 +49,8 @@ describe("add new text to speech", () => {
   it("should invoked polly accessKeyId and secretAccessKey from request", () => {
     expect(AWS.Polly.args[0][0]).toEqual(
       expect.objectContaining({
-        accessKeyId: "THE_ACCESS_ID",
-        secretAccessKey: "THE_SECRET_KEY",
+        accessKeyId: "ACCESS_KEY_ID",
+        secretAccessKey: "SECRET_ACCESS_KEY",
       })
     );
   });
