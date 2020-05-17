@@ -1,13 +1,13 @@
-const server = require("fastify")();
+const server = require('fastify')();
 
-server.get("/", async () => {
+server.get('/', async () => {
   return {
-    status: "ok",
+    status: 'ok',
   };
 });
 
-server.register(require("./routes/getProcessedList"));
-server.register(require("./routes/getProcessedAudio"));
-server.register(require("./routes/addToProcessedList"));
+server.register(require('./routes/getProcessedList'));
+server.register(require('./routes/getProcessedAudio'));
+server.register(require('./routes/addToProcessedList'));
 
 module.exports = { server };

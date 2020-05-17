@@ -1,5 +1,5 @@
-const { resolve } = require("path");
+const { resolve } = require('path');
 
 module.exports = {
-  dataPath: resolve(__dirname, "data"),
+  dataPath: resolve(__dirname, 'data'),
 };

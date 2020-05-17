@@ -1,16 +1,16 @@
-import React from "react";
-import { Input, Button } from "@chakra-ui/core";
+import React from 'react';
+import { Input, Button } from '@chakra-ui/core';
 
-import useProcessed from "../../api/use-processed";
-import addProcessed from "../../api/addProcessed";
+import useProcessed from '../../api/use-processed';
+import addProcessed from '../../api/addProcessed';
 
 const Home = () => {
-  const [newText, setNewText] = React.useState("");
+  const [newText, setNewText] = React.useState('');
   const { data = [], mutate } = useProcessed();
   const handleAdd = async () => {
     const res = await addProcessed(newText);
     if (res) {
-      setNewText("");
+      setNewText('');
       mutate(
         (data) => [
           ...data,

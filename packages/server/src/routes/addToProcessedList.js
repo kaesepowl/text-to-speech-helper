@@ -1,29 +1,29 @@
-const AWS = require("aws-sdk");
-const { promisify } = require("util");
-const { writeFile } = require("fs");
-const md5 = require("md5");
+const AWS = require('aws-sdk');
+const { promisify } = require('util');
+const { writeFile } = require('fs');
+const md5 = require('md5');
 
-const { dataPath } = require("../../config");
+const { dataPath } = require('../../config');
 
 const pWriteFile = promisify(writeFile);
 
 module.exports = async (fastify) => {
-  fastify.post("/processed", async (request, reply) => {
+  fastify.post('/processed', async (request, reply) => {
     try {
       const { text } = request.body;
       const Polly = new AWS.Polly({
         accessKeyId: process.env.POLLY_ACCESS_KEY_ID,
         secretAccessKey: process.env.POLLY_SECRET_ACCESS_KEY,
-        signatureVersion: "v4",
-        region: "eu-central-1",
+        signatureVersion: 'v4',
+        region: 'eu-central-1',
       });
 
       const { AudioStream } = await Polly.synthesizeSpeech({
         Text: `<speak>${text}</speak>`,
-        TextType: "ssml",
-        OutputFormat: "mp3",
-        VoiceId: "Hans",
-        LanguageCode: "de-DE",
+        TextType: 'ssml',
+        OutputFormat: 'mp3',
+        VoiceId: 'Hans',
+        LanguageCode: 'de-DE',
       }).promise();
 
       const newId = md5(text);

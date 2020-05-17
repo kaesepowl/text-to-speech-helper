@@ -1,7 +1,7 @@
-const { starter } = require("./starter");
+const { starter } = require('./starter');
 
-describe("starter", () => {
-  it("should invoke listen method of server", async () => {
+describe('starter', () => {
+  it('should invoke listen method of server', async () => {
     const PORT = 8080;
     const server = {
       listen: jest.fn(),

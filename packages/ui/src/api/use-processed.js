@@ -1,5 +1,5 @@
-import useSWR from "swr";
+import useSWR from 'swr';
 
-const useProcessed = () => useSWR("http://localhost:8080/processed");
+const useProcessed = () => useSWR('http://localhost:8080/processed');
 
 export default useProcessed;

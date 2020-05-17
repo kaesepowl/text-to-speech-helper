@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export const ThemeProvider = function ThemeProvider({ children }) {
   return <>{children}</>;
