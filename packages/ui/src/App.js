@@ -1,9 +1,8 @@
 import React from 'react';
-import { ThemeProvider, theme } from '@chakra-ui/core';
+import { ThemeProvider, theme, CSSReset, Box } from '@chakra-ui/core';
 import { Switch, Route } from 'react-router-dom';
 import { SWRConfig } from 'swr';
 
-import './App.css';
 import Home from './components/pages/Home';
 
 function App() {
@@ -14,13 +13,14 @@ function App() {
       }}
     >
       <ThemeProvider theme={theme}>
-        <div className="App">
+        <CSSReset />
+        <Box margin={6}>
           <Switch>
             <Route path="/">
               <Home />
             </Route>
           </Switch>
-        </div>
+        </Box>
       </ThemeProvider>
     </SWRConfig>
   );

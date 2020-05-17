@@ -1,5 +1,15 @@
 import React from 'react';
-import { Input, Button } from '@chakra-ui/core';
+import {
+  Input,
+  Box,
+  Button,
+  Grid,
+  Accordion,
+  AccordionItem,
+  AccordionHeader,
+  AccordionPanel,
+  AccordionIcon,
+} from '@chakra-ui/core';
 
 import useProcessed from '../../api/use-processed';
 import addProcessed from '../../api/addProcessed';
@@ -25,42 +35,49 @@ const Home = () => {
   };
 
   return (
-    <>
+    <div className="home">
       <Input
+        marginBottom={2}
         data-test-id="add-text-input"
         value={newText}
         onChange={(e) => setNewText(e.target.value)}
       />
-      <Button data-test-id="add-text-button" onClick={handleAdd}>
+      <Button
+        marginBottom={6}
+        data-test-id="add-text-button"
+        onClick={handleAdd}
+      >
         Create Audio
       </Button>
-      <table>
-        <thead>
-          <tr>
-            <th>Text</th>
-            <th>Preview</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map(({ text, id }) => (
-            <tr key={id}>
-              <td>{text}</td>
-              <td>
-                {id && (
-                  <audio
-                    controls
-                    src={`http://localhost:8080/processed/${id}/audio`}
-                  >
-                    Your browser does not support the
-                    <code>audio</code> element.
-                  </audio>
-                )}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </>
+      <Accordion allowToggle>
+        {data.map(({ text, id }) => (
+          <AccordionItem>
+            <AccordionHeader>
+              <Box flex="1" textAlign="left" isTruncated>
+                {text}
+              </Box>
+              <AccordionIcon />
+            </AccordionHeader>
+            <AccordionPanel pb={4} bg="gray.200">
+              <Grid templateColumns="1fr min-content" gap={2}>
+                <Box>{text}</Box>
+                <Box>
+                  {id && (
+                    <audio
+                      controls
+                      src={`http://localhost:8080/processed/${id}/audio`}
+                    >
+                      Your browser does not support the
+                      <code>audio</code> element.
+                    </audio>
+                  )}
+                </Box>
+              </Grid>
+            </AccordionPanel>
+          </AccordionItem>
+        ))}
+      </Accordion>
+    </div>
   );
 };
 
