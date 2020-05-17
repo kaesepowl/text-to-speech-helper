@@ -36,12 +36,13 @@ describe("render data", () => {
   });
 
   it("should find Text from mock item", () => {
-    // console.log(comp.render().text());
     expect(comp.text()).toEqual(expect.stringContaining("Hallo Paul"));
   });
-  it("should provide download link", () => {
+  it("should provide audio element", () => {
     expect(
-      comp.find(`[href="/audio/${"abcd1234".repeat(4)}.mp3"]`)
+      comp.find(
+        `[src="http://localhost:8080/processed/${"abcd1234".repeat(4)}/audio"]`
+      )
     ).toHaveLength(1);
   });
 });

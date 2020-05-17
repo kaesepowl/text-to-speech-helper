@@ -1,39 +1,66 @@
 import React from "react";
-import { Link } from "@chakra-ui/core";
+import { Input, Button } from "@chakra-ui/core";
 
 import useProcessed from "../../api/use-processed";
+import addProcessed from "../../api/addProcessed";
 
 const Home = () => {
-  const { data = [] } = useProcessed();
+  const [newText, setNewText] = React.useState("");
+  const { data = [], mutate } = useProcessed();
+  const handleAdd = async () => {
+    const res = await addProcessed(newText);
+    if (res) {
+      setNewText("");
+      mutate(
+        (data) => [
+          ...data,
+          {
+            id: res.id,
+            text: newText,
+          },
+        ],
+        false
+      );
+    }
+  };
+
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Text</th>
-          <th>Preview</th>
-          <th>Download</th>
-        </tr>
-      </thead>
-      <tbody>
-        {data.map(({ text, id }) => (
-          <tr key={id}>
-            <td>{text}</td>
-            <td>
-              <audio
-                controls
-                src={`http://localhost:8080/processed/${id}/audio`}
-              >
-                Your browser does not support the
-                <code>audio</code> element.
-              </audio>
-            </td>
-            <td>
-              <Link href={`/audio/${id}.mp3`}>Download</Link>
-            </td>
+    <>
+      <Input
+        data-test-id="add-text-input"
+        value={newText}
+        onChange={(e) => setNewText(e.target.value)}
+      />
+      <Button data-test-id="add-text-button" onClick={handleAdd}>
+        Create Audio
+      </Button>
+      <table>
+        <thead>
+          <tr>
+            <th>Text</th>
+            <th>Preview</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {data.map(({ text, id }) => (
+            <tr key={id}>
+              <td>{text}</td>
+              <td>
+                {id && (
+                  <audio
+                    controls
+                    src={`http://localhost:8080/processed/${id}/audio`}
+                  >
+                    Your browser does not support the
+                    <code>audio</code> element.
+                  </audio>
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
   );
 };
 
